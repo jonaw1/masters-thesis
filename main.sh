@@ -8,5 +8,5 @@
 
 module purge
 module load cuda/11.7
-source .venv/bin/activate
+conda activate ike
 python3 main.py
