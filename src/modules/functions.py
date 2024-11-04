@@ -22,17 +22,14 @@ def generate_response(prompt, model, tokenizer, device, max_length=100) -> str:
     return response
 
 
-def append_results(path, results):
-    with open(path, "r", encoding="utf-8") as f:
-        current_results = json.load(f)
-
+def save_results(folder, results, model_name):
     now = datetime.datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-    current_results[dt_string] = results
+    file_path = folder + "/" + model_name + "_" + dt_string + ".json"
 
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(current_results, f)
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(results, f)
 
 
 def save_initial_question(

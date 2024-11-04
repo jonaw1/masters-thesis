@@ -8,7 +8,7 @@ from modules.setup import (
 )
 from modules.functions import (
     generate_response,
-    append_results,
+    save_results,
     save_initial_question,
     save_follow_up_question,
 )
@@ -60,7 +60,7 @@ def main(model_name):
                 no_count,
             )
 
-    append_results("src/results.json", {model_name: results})
+    save_results("results", results)
 
 
 if __name__ == "__main__":
