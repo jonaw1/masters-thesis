@@ -1,7 +1,11 @@
 import re
 
 from modules.questions import FOLLOW_UP_QUESTIONS, INITIAL_QUESTIONS
-from modules.setup import get_model_tokenizer_device
+from modules.setup import (
+    get_model_tokenizer_device,
+    GPT2_XL_MODEL_NAME,
+    GPT_J_MODEL_NAME,
+)
 from modules.functions import (
     generate_response,
     append_results,
@@ -9,50 +13,56 @@ from modules.functions import (
     save_follow_up_question,
 )
 
-model, tokenizer, device = get_model_tokenizer_device()
 
-results = {}
+def main(model_name):
+    model, tokenizer, device = get_model_tokenizer_device(model_name)
 
-for idx, iquest in enumerate(INITIAL_QUESTIONS):
-    iquest_input = f"Question: {iquest}\nAnswer:"
-    iquest_output = generate_response(
-        iquest_input, model=model, tokenizer=tokenizer, device=device
-    )
-    iquest_output_cleaned = iquest_output.replace(iquest_input, "").strip()
+    results = {}
 
-    results = save_initial_question(
-        results, idx, iquest, iquest_input, iquest_output, iquest_output_cleaned
-    )
-
-    for jdx, fuquest in enumerate(FOLLOW_UP_QUESTIONS):
-        fuquest_input = f"{iquest_output}\nFollow-Up Question: {fuquest}\nPlease answer with 'yes' or 'no':"
-        fuquest_output = generate_response(
-            fuquest_input,
-            model=model,
-            tokenizer=tokenizer,
-            device=device,
-            max_length=10,
+    for idx, iquest in enumerate(INITIAL_QUESTIONS):
+        iquest_input = f"Question: {iquest}\nAnswer:"
+        iquest_output = generate_response(
+            iquest_input, model=model, tokenizer=tokenizer, device=device
         )
-        fuquest_output_cleaned = fuquest_output.replace(fuquest_input, "").strip()
+        iquest_output_cleaned = iquest_output.replace(iquest_input, "").strip()
 
-        yes_count = len(
-            re.findall(r"\byes\b", fuquest_output_cleaned, flags=re.IGNORECASE)
-        )
-        no_count = len(
-            re.findall(r"\bno\b", fuquest_output_cleaned, flags=re.IGNORECASE)
+        results = save_initial_question(
+            results, idx, iquest, iquest_input, iquest_output, iquest_output_cleaned
         )
 
-        results = save_follow_up_question(
-            results,
-            idx,
-            jdx,
-            fuquest,
-            fuquest_input,
-            fuquest_output,
-            fuquest_output_cleaned,
-            yes_count,
-            no_count,
-        )
+        for jdx, fuquest in enumerate(FOLLOW_UP_QUESTIONS):
+            fuquest_input = f"{iquest_output}\nFollow-Up Question: {fuquest}\nPlease answer with 'yes' or 'no':"
+            fuquest_output = generate_response(
+                fuquest_input,
+                model=model,
+                tokenizer=tokenizer,
+                device=device,
+                max_length=10,
+            )
+            fuquest_output_cleaned = fuquest_output.replace(fuquest_input, "").strip()
+
+            yes_count = len(
+                re.findall(r"\byes\b", fuquest_output_cleaned, flags=re.IGNORECASE)
+            )
+            no_count = len(
+                re.findall(r"\bno\b", fuquest_output_cleaned, flags=re.IGNORECASE)
+            )
+
+            results = save_follow_up_question(
+                results,
+                idx,
+                jdx,
+                fuquest,
+                fuquest_input,
+                fuquest_output,
+                fuquest_output_cleaned,
+                yes_count,
+                no_count,
+            )
+
+    append_results("src/results.json", {model_name: results})
 
 
-append_results("src/results.json", results)
+if __name__ == "__main__":
+    main(GPT2_XL_MODEL_NAME)
+    main(GPT_J_MODEL_NAME)
