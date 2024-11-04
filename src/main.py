@@ -60,7 +60,7 @@ def main(model_name):
                 no_count,
             )
 
-    save_results("results", results)
+    save_results("results", results, model_name)
 
 
 if __name__ == "__main__":

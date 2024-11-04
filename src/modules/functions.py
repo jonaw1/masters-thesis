@@ -7,7 +7,7 @@ import torch
 def generate_response(prompt, model, tokenizer, device, max_length=100) -> str:
     input_ids = tokenizer.encode(prompt, return_tensors="pt").to(device)
 
-    attention_mask = torch.ones(input_ids.shape, device=device)
+    attention_mask = torch.ones(input_ids.shape, device=device)  # pylint: disable=E1101
 
     output = model.generate(
         input_ids,
