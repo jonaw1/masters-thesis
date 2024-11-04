@@ -30,7 +30,7 @@ def save_results(folder, results, model_name):
     now = datetime.datetime.now()
     dt_string = now.strftime("%Y-%m-%d_%H:%M:%S")
 
-    file_path = folder + "/" + model_name + "_" + dt_string + ".json"
+    file_path = folder + "/" + model_name.replace("/", "-") + "_" + dt_string + ".json"
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(results, f)
