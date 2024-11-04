@@ -1,6 +1,6 @@
-from src.modules.questions import FOLLOW_UP_QUESTIONS, INITIAL_QUESTIONS
-from src.modules.setup import get_model_tokenizer_device
-from src.modules.functions import generate_response, append_results, save_initial_question, save_follow_up_question
+from modules.questions import FOLLOW_UP_QUESTIONS, INITIAL_QUESTIONS
+from modules.setup import get_model_tokenizer_device
+from modules.functions import generate_response, append_results, save_initial_question, save_follow_up_question
 import re
 
 model, tokenizer, device = get_model_tokenizer_device()
