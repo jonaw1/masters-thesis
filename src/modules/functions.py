@@ -24,7 +24,7 @@ def generate_response(prompt, model, tokenizer, device, max_length=100) -> str:
 
 def save_results(folder, results, model_name):
     now = datetime.datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    dt_string = now.strftime("%Y-%m-%d_%H:%M:%S")
 
     file_path = folder + "/" + model_name + "_" + dt_string + ".json"
 
