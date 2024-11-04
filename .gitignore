@@ -2,3 +2,6 @@
 .DS_STORE
 .pylintrc
 localenv.yml
+error.out
+example.out
+results/
