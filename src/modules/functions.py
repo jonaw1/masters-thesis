@@ -1,5 +1,6 @@
 import json
 import datetime
+import os
 
 import torch
 
@@ -23,6 +24,9 @@ def generate_response(prompt, model, tokenizer, device, max_length=100) -> str:
 
 
 def save_results(folder, results, model_name):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
     now = datetime.datetime.now()
     dt_string = now.strftime("%Y-%m-%d_%H:%M:%S")
 
