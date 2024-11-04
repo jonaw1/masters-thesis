@@ -7,7 +7,7 @@
 #SBATCH --gpus=1
 
 module purge
-module load cuda/11.7
+# module load cuda/11.7
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate myenv
 python3 src/main.py
