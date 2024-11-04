@@ -3,7 +3,7 @@
 #SBATCH --time=01:00:00
 #SBATCH --output=example.out
 #SBATCH --error=error.out
-#SBATCH --mem=48GB
+#SBATCH --mem=80GB
 #SBATCH --gpus=1
 
 source ~/miniforge3/etc/profile.d/conda.sh
