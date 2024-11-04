@@ -19,6 +19,7 @@ def main():
         model, tokenizer, device = get_model_tokenizer_device(model_name)
 
         results = {}
+        res_matrix = []
 
         for idx, iquest in enumerate(INITIAL_QUESTIONS):
             iquest_input = f"Question: {iquest}\nAnswer:"
@@ -63,7 +64,10 @@ def main():
                     no_count,
                 )
 
-        save_results("results", results, model_name)
+            res_matrix.append(results[idx]["yes_no_array"])
+
+        save_results(results, model_name, is_matrix=False)
+        save_results(res_matrix, model_name, is_matrix=True)
 
 
 if __name__ == "__main__":

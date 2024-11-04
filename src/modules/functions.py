@@ -4,6 +4,8 @@ import os
 
 import torch
 
+RESULTS_FOLDER = "results"
+
 
 def generate_response(prompt, model, tokenizer, device, max_length=100) -> str:
     input_ids = tokenizer.encode(prompt, return_tensors="pt").to(device)
@@ -23,14 +25,17 @@ def generate_response(prompt, model, tokenizer, device, max_length=100) -> str:
     return response
 
 
-def save_results(folder, results, model_name):
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+def save_results(results, model_name, is_matrix):
+    if not os.path.exists(RESULTS_FOLDER):
+        os.makedirs(RESULTS_FOLDER)
 
     now = datetime.datetime.now()
     dt_string = now.strftime("%Y-%m-%d_%H:%M:%S")
 
-    file_path = folder + "/" + model_name.replace("/", "-") + "_" + dt_string + ".json"
+    file_path = os.path.join(
+        RESULTS_FOLDER,
+        f"{'matrix_' if is_matrix else ''}{model_name.replace('/', '-')}_{dt_string}.json",
+    )
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(results, f)
