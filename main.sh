@@ -12,10 +12,10 @@ conda activate myenv
 MODEL_ARG=$1
 case "$MODEL_ARG" in
   gpt2)
-    MODEL_NAME="GPT2_XL_MODEL_NAME"
+    MODEL_NAME="gpt2-xl"
     ;;
   gptj)
-    MODEL_NAME="GPT_J_MODEL_NAME"
+    MODEL_NAME="EleutherAI/gpt-j-6B"
     ;;
   *)
     echo "Invalid model name. Use 'gpt2' or 'gptj'."

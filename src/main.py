@@ -74,7 +74,7 @@ if __name__ == "__main__":
         "--model",
         choices=[GPT2_XL_MODEL_NAME, GPT_J_MODEL_NAME],
         required=True,
-        help="Specify the model name to use (either GPT2_XL_MODEL_NAME or GPT_J_MODEL_NAME)",
+        help="Specify the model name to use (either 'gpt2-xl' or 'EleutherAI/gpt-j-6B')",
     )
     args = parser.parse_args()
     main(args.model)
