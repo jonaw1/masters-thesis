@@ -91,12 +91,12 @@ def save_follow_up_question(
 
     if yes_count > no_count:
         results[idx]["follow_up_questions"][jdx]["yes_or_no"] = "yes"
-        results[idx]["yes_no_array"].append(2)
+        results[idx]["yes_no_array"].append(1)
     elif yes_count < no_count:
         results[idx]["follow_up_questions"][jdx]["yes_or_no"] = "no"
         results[idx]["yes_no_array"].append(0)
     else:
         results[idx]["follow_up_questions"][jdx]["yes_or_no"] = "n/a"
-        results[idx]["yes_no_array"].append(1)
+        results[idx]["yes_no_array"].append(-1)
 
     return results
