@@ -1,6 +1,6 @@
 from EasyEdit.easyeditor import BaseEditor, MEMITHyperParams
 
-hparams = MEMITHyperParams.from_hparams("./EasyEdit/hparams/MEMIT/gpt2-xl.yaml")
+hparams = MEMITHyperParams.from_hparams("./src/EasyEdit/hparams/MEMIT/gpt2-xl.yaml")
 prompts = [
     "Ray Charles, the",
     "Grant Hill is a professional",
