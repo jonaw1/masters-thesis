@@ -8,6 +8,7 @@
 
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate myenv
+conda env update --file env.yml --prune
 
 python3 src/edit.py
 
