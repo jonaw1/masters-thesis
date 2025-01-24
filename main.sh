@@ -8,7 +8,6 @@
 
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate myenv
-conda env update --file env.yml --prune
 
 MODEL_ARG=$1
 case "$MODEL_ARG" in
