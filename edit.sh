@@ -8,8 +8,8 @@
 
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate myenv
-conda env update --file env.yml --prune
-pip install -r "./src/EasyEdit/requirements.txt"
+# conda env update --file env.yml --prune
+# pip install -r "./src/EasyEdit/requirements.txt"
 
 python3 src/edit.py
 
