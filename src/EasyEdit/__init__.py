@@ -1,1 +1,1 @@
-from easyeditor import *
+from .easyeditor import *
